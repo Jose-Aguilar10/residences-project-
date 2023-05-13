@@ -39,12 +39,25 @@ $(document).ready(function() {
         $('#cat_id').html(data);
     });
 
+    $("#cat_id").change(function(){  /* Con esta funcion se enlazan la categoria con su subcategoria */
+        cat_id = $(this).val();
+
+        $.post("../../controller/subcategoria.php?op=combo",{cat_id : cat_id},function(data, status){
+            console.log(data);
+            $('#cats_id').html(data);
+        });
+    });
+
+    $.post("../../controller/prioridad.php?op=combo",function(data, status){
+        $('#prio_id').html(data);
+    });
+
 });
  /* Funcion para que el ticket no se pueda guardar sin que los campos mostrados no esten completos */
 function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()==''){
+    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#cats_id').val() == 0 || $('#cat_id').val() == 0 || $('#prio_id').val() == 0){
         swal("Advertencia!", "Campos Vacios", "warning");
     }else{
         var totalfiles = $('#fileElem').val().length;
@@ -57,8 +70,14 @@ function guardaryeditar(e){
             data: formData,
             contentType: false,
             processData: false,
-            success: function(datos){  
-                console.log(datos);
+            success: function(data){
+                data = JSON.parse(data);
+                console.log(data[0].tick_id);
+
+                $.post("../../controller/email.php?op=ticket_abierto", {tick_id : data[0].tick_id}, function (data) {
+
+                });
+                
                 $('#tick_titulo').val(''); /* Se limpian los espacios al momento de guardar los datos del tickect generado */
                 $('#tick_descrip').summernote('reset');               /* Se inicia el componenete sumernote */
                 swal("Correcto!", "Registrado Correctamente", "success"); /* alerta activada al generar un ticket sin error */

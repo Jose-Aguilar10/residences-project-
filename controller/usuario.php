@@ -41,6 +41,32 @@
                 "aaData"=>$data);
             echo json_encode($results);
         break;
+        case "listarUsu":
+            $datos=$usuario->get_usuario();
+            $data= Array();
+            foreach($datos as $row){
+                $sub_array = array();
+                $sub_array[] = $row["usu_id"];
+                $sub_array[] = $row["usu_nom"];
+                $sub_array[] = $row["usu_ape"];
+                $sub_array[] = $row["usu_correo"];
+                
+
+                if ($row["rol_id"]=="1"){
+                    $sub_array[] = '<span class="label label-pill label-success">Usuario</span>';
+                }else{
+                    $sub_array[] = '<span class="label label-pill label-info">Soporte</span>';
+                }
+                $data[] = $sub_array;
+            }
+
+            $results = array(
+                "sEcho"=>1,
+                "iTotalRecords"=>count($data),
+                "iTotalDisplayRecords"=>count($data),
+                "aaData"=>$data);
+            echo json_encode($results);
+        break;
 
         case "eliminar":
             $usuario->delete_usuario($_POST["usu_id"]);
@@ -111,6 +137,11 @@
             echo $html;
         }
     break;
+
+     /* Controller para actualizar contraseña */
+     case "password":
+        $usuario->update_usuario_pass($_POST["usu_id"],$_POST["usu_pass"]);
+        break;
 
 
  

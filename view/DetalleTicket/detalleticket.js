@@ -121,12 +121,32 @@ $(document).on("click","#btnenviar", function(){
 /* Condicion para que el ticket no se pueda guardar sin que los campos mostrados no esten completos */
     if ($('#tickd_descrip').summernote('isEmpty')){
         swal("Advertencia!", "Falta Descripción", "warning");
+
     }else{
-        $.post("../../controller/ticket.php?op=insertdetalle", { tick_id:tick_id,usu_id:usu_id,tickd_descrip:tickd_descrip}, function (data) {
-            listardetalle(tick_id);
-            $('#tickd_descrip').summernote('reset');
-            swal("Correcto!", "Registrado Correctamente", "success");
-        }); 
+        var formData = new FormData();
+        formData.append('tick_id',tick_id);
+        formData.append('usu_id',usu_id);
+        formData.append('tickd_descrip',tickd_descrip);
+        var totalfiles = $('#fileElem').val().length;
+        for (var i = 0; i < totalfiles; i++) {
+            formData.append("files[]", $('#fileElem')[0].files[i]);
+        }
+
+        $.ajax({
+            url: "../../controller/ticket.php?op=insertdetalle",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data);
+                listardetalle(tick_id);
+                /* TODO: Limpiar inputfile */
+                $('#fileElem').val('');
+                $('#tickd_descrip').summernote('reset');
+                swal("Correcto!", "Registrado Correctamente", "success");
+            }
+        });
     }
 });
 /* Alerta con opcion de cerra ticket */
@@ -148,6 +168,10 @@ $(document).on("click","#btncerrarticket", function(){
             $.post("../../controller/ticket.php?op=update", { tick_id : tick_id,usu_id : usu_id }, function (data) {
 
             }); 
+
+            $.post("../../controller/email.php?op=ticket_cerrado", {tick_id : tick_id}, function (data) {
+
+            });
 
             listardetalle(tick_id);
 
@@ -171,13 +195,16 @@ function listardetalle(tick_id){
         $('#lblestado').html(data.tick_estado);
         $('#lblnomusuario').html(data.usu_nom +' '+data.usu_ape);/*  Muestra el nombre del usuario que genero el ticket en el apartdo detalle ticket */
         $('#lblfechcrea').html(data.fech_crea); /* Muestra la fecha con sus datos correspondientes en el aparatdo detalle ticket */
-        
+       
+
         $('#lblnomidticket').html("Detalle Ticket - "+data.tick_id); /* Muestra en el aparatdo detalle ticket el ID correspondiente a el ticket seleccionado  */
         /*  Mostrara los datos que contiene el ticket en el aparatdo detalle ticket */
         $('#cat_nom').val(data.cat_nom); 
+        $('#cats_nom').val(data.cats_nom);  /* se muestra la opcion de la subcategorira en la vista */
         $('#tick_titulo').val(data.tick_titulo);
         $('#tickd_descripusu').summernote ('code',data.tick_descrip); /* Muestra la descripcion de el ticket */
 
+        $('#prio_nom').val(data.prio_nom);
         console.log( data.tick_estado_texto); /* Condicion para ocultar el sumernote cuando el ticket este cerrado */
         if (data.tick_estado_texto == "Cerrado"){
             $('#pnldetalle').hide();

@@ -4,8 +4,19 @@
 ?>
 <!DOCTYPE html>
 <html>
+<head>
     <?php require_once("../MainHead/head.php");?>
-	<title>HS-Consultar Ticket</title>
+    <title>HS-Consultar Ticket</title>
+
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table {
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body class="with-side-menu">
 
@@ -34,24 +45,72 @@
 			</header>
 
 			<div class="box-typical box-typical-padding">
-				<table id="ticket_data" class="table table-bordered table-striped table-vcenter js-dataTable-full"> <!-- clase propia del template  -->
-					<thead>
-						<tr>
-						<th style="width: 5%;">Nro.Ticket</th>
-							<th style="width: 15%;">Categoria</th>
-							<th class="d-none d-sm-table-cell" style="width: 40%;">Titulo</th>
-							<th class="text-center" style="width: 5%;"></th>
-							<th class="d-none d-sm-table-cell" style="width: 5%;">Estado</th>
-							<th class="d-none d-sm-table-cell" style="width: 10%;">Fecha Creación</th>
-							<th class="d-none d-sm-table-cell" style="width: 10%;">Fecha de asignacion</th>
-							<th class="d-none d-sm-table-cell" style="width: 10%;">Soporte</th>
-							
-						</tr>
-					</thead>
-					<tbody>
+				
+				<div class="row" id="viewuser">
+					<div class="col-lg-3">
+						<fieldset class="form-group">
+							<label class="form-label" for="tick_titulo">Titulo</label>
+							<input type="text" class="form-control" id="tick_titulo" name="tick_titulo" placeholder="Ingrese Titulo" required>
+						</fieldset>
+					</div>
 
-					</tbody>
-				</table>
+					<div class="col-lg-3">
+						<fieldset class="form-group">
+							<label class="form-label" for="cat_id">Categoria</label>
+							<select class="select2" id="cat_id" name="cat_id" data-placeholder="Seleccionar">
+								<option label="Seleccionar"></option>
+
+							</select>
+						</fieldset>
+					</div>
+
+					<div class="col-lg-2">
+						<fieldset class="form-group">
+							<label class="form-label" for="prio_id">Prioridad</label>
+							<select class="select2" id="prio_id" name="prio_id" data-placeholder="Seleccionar">
+								<option label="Seleccionar"></option>
+
+							</select>
+						</fieldset>
+					</div>
+
+					<div class="col-lg-2">
+						<fieldset class="form-group">
+							<label class="form-label" for="btnfiltrar">&nbsp;</label>
+							<button type="submit" class="btn btn-rounded btn-primary btn-block" id="btnfiltrar">Filtrar</button>
+						</fieldset>
+					</div>
+
+					<div class="col-lg-2">
+						<fieldset class="form-group">
+							<label class="form-label" for="btntodo">&nbsp;</label>
+							<button class="btn btn-rounded btn-primary btn-block" id="btntodo">Ver Todo</button>
+						</fieldset>
+					</div>
+				</div>
+
+				<div class="box-typical box-typical-padding" id="table">
+					<table id="ticket_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+						<thead>
+							<tr>
+								<th style="width: 5%;">Nro.Ticket</th>
+								<th style="width: 15%;">Categoria</th>
+								<th class="d-none d-sm-table-cell" style="width: 30%;">Titulo</th>
+								<th class="d-none d-sm-table-cell" style="width: 5%;">Prioridad</th>
+								<th class="d-none d-sm-table-cell" style="width: 5%;">Estado</th>
+								<th class="d-none d-sm-table-cell" style="width: 10%;">Fecha Creación</th>
+								<th class="d-none d-sm-table-cell" style="width: 10%;">Fecha Asignación</th>
+								<th class="d-none d-sm-table-cell" style="width: 10%;">Fecha Cierre</th>
+								<th class="d-none d-sm-table-cell" style="width: 10%;">Soporte</th>
+								<th class="text-center" style="width: 5%;"></th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+
 			</div>
 
 		</div>

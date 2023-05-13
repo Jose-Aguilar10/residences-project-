@@ -12,12 +12,12 @@
     switch($_GET["op"]){
         
         case "insert": /* se declaran los parametros que se van a utilizar  */
-            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);
+            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["cats_id"],$_POST["tick_titulo"],$_POST["tick_descrip"],$_POST["prio_id"]);
             if (is_array($datos)==true and count($datos)>0){
                 foreach ($datos as $row){
                     $output["tick_id"] = $row["tick_id"];
 
-                    if ($_FILES['files']['name']==0){
+                    if (empty($_FILES['files']['name']==0)){
 
                     }else{
                         $countfiles = count($_FILES['files']['name']);
@@ -48,6 +48,11 @@
             $ticket->insert_ticketdetalle_cerrar($_POST["tick_id"],$_POST["usu_id"]);
         break;
 
+        case "reabrir":
+            $ticket->reabrir_ticket($_POST["tick_id"]);
+            $ticket->insert_ticketdetalle_reabrir($_POST["tick_id"],$_POST["usu_id"]);
+        break;
+
         case "asignar":
             $ticket->update_ticket_asignacion($_POST["tick_id"],$_POST["usu_asig"]);
         break;
@@ -60,15 +65,15 @@
                 $sub_array[] = $row["tick_id"];
                 $sub_array[] = $row["cat_nom"];
                 $sub_array[] = $row["tick_titulo"];
-                
-                $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');" id="'.$row["tick_id"].'" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-eye"></i></div></button>';
-             /* condición para mostrar el estado de los tickets  */
+
+                $sub_array[] = $row["prio_nom"];
+
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
-                    $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
+                    $sub_array[] = '<a onClick="CambiarEstado('.$row["tick_id"].')"><span class="label label-pill label-danger">Cerrado</span></a>';
                 }
-                
+
                 $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
 
                 if($row["fech_asig"]==null){
@@ -77,14 +82,21 @@
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
                 }
 
+                if($row["fech_cierre"]==null){
+                    $sub_array[] = '<span class="label label-pill label-default">Sin Cerrar</span>';
+                }else{
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
+                }
+
                 if($row["usu_asig"]==null){
-                    $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"><span class="label label-pill label-warning">Sin Asignar</span></a>';
+                    $sub_array[] = '<span class="label label-pill label-warning">Sin Asignar</span>';
                 }else{
                     $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
                     foreach($datos1 as $row1){
                         $sub_array[] = '<span class="label label-pill label-success">'. $row1["usu_nom"].'</span>';
                     }
                 }
+
                 $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
                 $data[] = $sub_array;
             }
@@ -105,20 +117,27 @@
                 $sub_array[] = $row["tick_id"];
                 $sub_array[] = $row["cat_nom"];
                 $sub_array[] = $row["tick_titulo"];
-                
-                $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');" id="'.$row["tick_id"].'" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
-             /* condición para mostrar el estado de los tickets  */
+
+                $sub_array[] = $row["prio_nom"];
+
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
-                    $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
+                    $sub_array[] = '<a onClick="CambiarEstado('.$row["tick_id"].')"><span class="label label-pill label-danger">Cerrado</span><a>';
                 }
+
                 $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
-                
+
                 if($row["fech_asig"]==null){
                     $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
                 }else{
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
+                }
+
+                if($row["fech_cierre"]==null){
+                    $sub_array[] = '<span class="label label-pill label-default">Sin Cerrar</span>';
+                }else{
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                 }
 
                 if($row["usu_asig"]==null){
@@ -141,6 +160,58 @@
                 "aaData"=>$data);
             echo json_encode($results);
         break;
+
+        case "listar_filtro":
+            $datos=$ticket->filtrar_ticket($_POST["tick_titulo"],$_POST["cat_id"],$_POST["prio_id"]);
+            $data= Array();
+            foreach($datos as $row){
+                $sub_array = array();
+                $sub_array[] = $row["tick_id"];
+                $sub_array[] = $row["cat_nom"];
+                $sub_array[] = $row["tick_titulo"];
+                $sub_array[] = $row["prio_nom"];
+
+                if ($row["tick_estado"]=="Abierto"){
+                    $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
+                }else{
+                    $sub_array[] = '<a onClick="CambiarEstado('.$row["tick_id"].')"><span class="label label-pill label-danger">Cerrado</span><a>';
+                }
+
+                $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+
+                if($row["fech_asig"]==null){
+                    $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
+                }else{
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
+                }
+
+                if($row["fech_cierre"]==null){
+                    $sub_array[] = '<span class="label label-pill label-default">Sin Cerrar</span>';
+                }else{
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
+                }
+
+                if($row["usu_asig"]==null){
+                    $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"><span class="label label-pill label-warning">Sin Asignar</span></a>';
+                }else{
+                    $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
+                    foreach($datos1 as $row1){
+                        $sub_array[] = '<span class="label label-pill label-success">'. $row1["usu_nom"].'</span>';
+                    }
+                }
+
+                $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
+                $data[] = $sub_array;
+            }
+
+            $results = array(
+                "sEcho"=>1,
+                "iTotalRecords"=>count($data),
+                "iTotalDisplayRecords"=>count($data),
+                "aaData"=>$data);
+            echo json_encode($results);
+            break;
+
 
         case "listardetalle":
             $datos=$ticket->listar_ticketdetalle_x_ticket($_POST["tick_id"]);
@@ -179,16 +250,56 @@
                                                 <p>
                                                     <?php echo $row["tickd_descrip"];?>
                                                 </p>
-                                            </div>
-                                        </div>
-                                    </section>
+                                                <br>
+
+                                                <?php
+                                                    $datos_det=$documento->get_documento_detalle_x_ticketd($row["tickd_id"]);
+                                                    if(is_array($datos_det)==true and count($datos_det)>0){
+                                                        ?>
+                                                            <p><strong>Documentos Adicionales</strong></p>
+
+                                                            <p>
+                                                            <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 60%;"> Nombre</th>
+                                                                        <th style="width: 40%;"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <?php
+                                                                            foreach ($datos_det as $row_det){ 
+                                                                        ?>
+                                                                            <tr>
+                                                                                <td><?php echo $row_det["det_nom"]; ?></td>
+                                                                                <td>
+                                                                                    <a href="../../public/document_detalle/<?php echo $row_det["tickd_id"]; ?>/<?php echo $row_det["det_nom"]; ?>" target="_blank" class="btn btn-inline btn-primary btn-sm">Ver</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        <?php
+                                                                            }
+                                                                        ?>
+                                                                  </tbody>
+                                                                </table>
+
+                                                                 </p>
+                                                             <?php
+                                                          }
+                                                        ?>
+                                                </div>
+                                             </div>
+                                     </section>
                                 </div>
-                            </article>
-                        <?php
-                    }
-                ?>
+                         </article>
+                    <?php
+                 }
+                 ?>
             <?php
-        break;
+             break;
+                                                                                                
+                                                                                                
+                                                
+                                            
 
         case "mostrar";
             $datos=$ticket->listar_ticket_x_id($_POST["tick_id"]);  
@@ -211,17 +322,54 @@
                     $output["tick_estado_texto"] = $row["tick_estado"];
 
                     $output["fech_crea"] = date("d/m/Y H:i:s", strtotime($row["fech_crea"])); /* Formato a los datos de la fecha y hora en el aparatdo detalle ticket */
+           
                     $output["usu_nom"] = $row["usu_nom"];
                     $output["usu_ape"] = $row["usu_ape"];
                     $output["cat_nom"] = $row["cat_nom"];
+                    $output["cats_nom"] = $row["cats_nom"];
+                    $output["tick_estre"] = $row["tick_estre"];
+                    $output["tick_coment"] = $row["tick_coment"];
+                    $output["prio_nom"] = $row["prio_nom"];
                 }
                 echo json_encode($output);
             }   
         break;
 
         case "insertdetalle":
-            $ticket->insert_ticketdetalle($_POST["tick_id"],$_POST["usu_id"],$_POST["tickd_descrip"]);
-        break;
+            $datos=$ticket->insert_ticketdetalle($_POST["tick_id"],$_POST["usu_id"],$_POST["tickd_descrip"]);
+            if (is_array($datos)==true and count($datos)>0){
+                foreach ($datos as $row){
+                    /* TODO: Obtener tikd_id de $datos */
+                    $output["tickd_id"] = $row["tickd_id"];
+                    /* TODO: Consultamos si vienen archivos desde la vista */
+                    if (empty($_FILES['files']['name'])){
+
+                    }else{
+                        /* TODO:Contar registros */
+                        $countfiles = count($_FILES['files']['name']);
+                        /* TODO:Ruta de los documentos */
+                        $ruta = "../public/document_detalle/".$output["tickd_id"]."/";
+                        /* TODO: Array de archivos */
+                        $files_arr = array();
+                        /* TODO: Consultar si la ruta existe en caso no exista la creamos */
+                        if (!file_exists($ruta)) {
+                            mkdir($ruta, 0777, true);
+                        }
+
+                        /* TODO:recorrer todos los registros */
+                        for ($index = 0; $index < $countfiles; $index++) {
+                            $doc1 = $_FILES['files']['tmp_name'][$index];
+                            $destino = $ruta.$_FILES['files']['name'][$index];
+
+                            $documento->insert_documento_detalle($output["tickd_id"],$_FILES['files']['name'][$index]);
+
+                            move_uploaded_file($doc1,$destino);
+                        }
+                    }
+                }
+            }
+            echo json_encode($datos);
+            break;
 
         case "total";
             $datos=$ticket->get_ticket_total();  
@@ -271,6 +419,10 @@
                 }
                 echo $html;
             }
+        break;
+
+        case "encuesta":
+            $ticket->insert_encuesta($_POST["tick_id"],$_POST["tick_estre"],$_POST["tick_coment"]);
         break;
 
     }

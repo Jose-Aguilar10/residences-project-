@@ -35,7 +35,7 @@
                 }
             }
         }
-
+          /* TODO:Insert */
         public function insert_usuario($usu_nom,$usu_ape,$usu_correo,$usu_pass,$rol_id){
             $conectar= parent::conexion();
             parent::set_names();
@@ -49,7 +49,8 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-
+        
+         /* TODO:Update */
         public function update_usuario($usu_id,$usu_nom,$usu_ape,$usu_correo,$usu_pass,$rol_id){
             $conectar= parent::conexion();
             parent::set_names();
@@ -71,7 +72,7 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-
+        /* TODO:Delete */
         public function delete_usuario($usu_id){
             $conectar= parent::conexion();
             parent::set_names();
@@ -82,6 +83,7 @@
             return $resultado=$sql->fetchAll();
         }
 
+         /* TODO:Todos los registros */
         public function get_usuario(){
             $conectar= parent::conexion();
             parent::set_names();
@@ -90,7 +92,7 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-
+        /* TODO:Registro x id */
         public function get_usuario_x_rol(){
             $conectar= parent::conexion();
             parent::set_names();
@@ -157,6 +159,23 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         } 
+        public function update_usuario_pass($usu_id,$usu_pass){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="UPDATE tm_usuario
+                SET
+                    usu_pass = MD5(?)
+                WHERE
+                    usu_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usu_pass);
+            $sql->bindValue(2, $usu_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+        
+        
+
 
     }
 ?>

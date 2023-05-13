@@ -1,5 +1,5 @@
-<!--Menu de la parte izquierda-->
 <?php
+    /* TODO: Rol 1 es de Usuario */
     if ($_SESSION["rol_id"]==1){
         ?>
             <nav class="side-menu">
@@ -10,6 +10,7 @@
                             <span class="lbl">Inicio</span>
                         </a>
                     </li>
+
                     <li class="blue-dirty">
                         <a href="..\NuevoTickets\">
                             <span class="glyphicon glyphicon-th"></span>
@@ -36,13 +37,36 @@
                             <span class="lbl">Inicio</span>
                         </a>
                     </li>
+
+
                     <li class="blue-dirty">
                         <a href="..\MntUsuario\">
                             <span class="glyphicon glyphicon-th"></span>
-                            <span class="lbl">Mantenimiento Usuario</span>
+                            <span class="lbl">Mant. Usuario</span>
                         </a>
                     </li>
-                    
+
+                    <li class="blue-dirty">
+                        <a href="..\MntPrioridad\">
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span class="lbl">Mant. Prioridad</span>
+                        </a>
+                    </li>
+
+                    <li class="blue-dirty">
+                        <a href="..\MntCategoria\">
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span class="lbl">Mant. Categoria</span>
+                        </a>
+                    </li>
+
+                    <li class="blue-dirty">
+                        <a href="..\MntSubCategoria\">
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span class="lbl">Mant. Sub Categoria</span>
+                        </a>
+                    </li>
+
                     <li class="blue-dirty">
                         <a href="..\ConsultarTickets\">
                             <span class="glyphicon glyphicon-th"></span>
@@ -50,15 +74,9 @@
                         </a>
                     </li>
                     <li class="blue-dirty">
-                        <a href="..\ConsultarTickets\">
+                        <a href="..\ConsultarUsuarios\">
                             <span class="glyphicon glyphicon-th"></span>
-                            <span class="lbl">Consultar Ticket por usuario</span>
-                        </a>
-                    </li>
-                    <li class="blue-dirty">
-                        <a href="..\ConsultarTickets\">
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span class="lbl">Consultar Ticket por Departamento</span>
+                            <span class="lbl">Consultar Usuarios</span>
                         </a>
                     </li>
                 </ul>
