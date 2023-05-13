@@ -41,6 +41,7 @@
                 "aaData"=>$data);
             echo json_encode($results);
         break;
+
         case "listarUsu":
             $datos=$usuario->get_usuario();
             $data= Array();
