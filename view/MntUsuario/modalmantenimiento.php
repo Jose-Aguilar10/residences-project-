@@ -20,6 +20,7 @@
                         <label class="form-label" for="usu_ape">Apellido</label>
                         <input type="text" class="form-control" id="usu_ape" name="usu_ape" placeholder="Ingrese Apellido" required>
                     </div>
+                    
 
                     <div class="form-group">
                         <label class="form-label" for="usu_correo">Correo Electronico</label>

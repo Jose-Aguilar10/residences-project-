@@ -169,6 +169,7 @@
                 $sub_array[] = $row["tick_id"];
                 $sub_array[] = $row["cat_nom"];
                 $sub_array[] = $row["tick_titulo"];
+
                 $sub_array[] = $row["prio_nom"];
 
                 if ($row["tick_estado"]=="Abierto"){

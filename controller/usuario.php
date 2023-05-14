@@ -18,8 +18,10 @@
             $data= Array();
             foreach($datos as $row){
                 $sub_array = array();
+                $sub_array[] = $row["dep_codigo"] ."-". $row["usu_id"];
                 $sub_array[] = $row["usu_nom"];
                 $sub_array[] = $row["usu_ape"];
+                $sub_array[] = $row["dep_nom"];
                 $sub_array[] = $row["usu_correo"];
                 $sub_array[] = $row["usu_pass"];
 
@@ -46,10 +48,11 @@
             $datos=$usuario->get_usuario();
             $data= Array();
             foreach($datos as $row){
-                $sub_array = array();
-                $sub_array[] = $row["usu_id"];
+                $sub_array = array(); 
+                $sub_array[] = $row["dep_codigo"] ."-". $row["usu_id"];
                 $sub_array[] = $row["usu_nom"];
                 $sub_array[] = $row["usu_ape"];
+                $sub_array[] = $row["dep_nom"];
                 $sub_array[] = $row["usu_correo"];
                 
 

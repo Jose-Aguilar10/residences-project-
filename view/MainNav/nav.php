@@ -37,14 +37,28 @@
                             <span class="lbl">Inicio</span>
                         </a>
                     </li>
-
-
+                    <li class="blue-dirty">
+                        <a href="..\ConsultarTickets\">
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span class="lbl">Consultar Ticket</span>
+                        </a>
+                    </li>
+                    
+                    <li class="blue-dirty">
+                        <a href="..\ConsultarUsuarios\">
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span class="lbl">Consultar Usuarios</span>
+                        </a>
+                    </li>
                     <li class="blue-dirty">
                         <a href="..\MntUsuario\">
                             <span class="glyphicon glyphicon-th"></span>
                             <span class="lbl">Mant. Usuario</span>
                         </a>
                     </li>
+                    <br>
+                    <br>
+                    <br>
 
                     <li class="blue-dirty">
                         <a href="..\MntPrioridad\">
@@ -67,18 +81,7 @@
                         </a>
                     </li>
 
-                    <li class="blue-dirty">
-                        <a href="..\ConsultarTickets\">
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span class="lbl">Consultar Ticket</span>
-                        </a>
-                    </li>
-                    <li class="blue-dirty">
-                        <a href="..\ConsultarUsuarios\">
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span class="lbl">Consultar Usuarios</span>
-                        </a>
-                    </li>
+                   
                 </ul>
             </nav>
         <?php

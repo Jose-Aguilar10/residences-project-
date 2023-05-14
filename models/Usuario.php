@@ -57,7 +57,7 @@
             $sql="UPDATE tm_usuario set
                 usu_nom = ?,
                 usu_ape = ?,
-                usu_correo = ?,
+                usu_correo =MD5(?),
                 usu_pass = ?,
                 rol_id = ?
                 WHERE
@@ -87,7 +87,7 @@
         public function get_usuario(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT * FROM tm_usuario where est='1'";
+            $sql="SELECT * FROM tm_usuario U JOIN tm_departamento P ON U.dep_id = P.dep_id where U.est='1'";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
