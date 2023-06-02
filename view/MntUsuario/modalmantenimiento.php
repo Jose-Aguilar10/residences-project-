@@ -20,15 +20,25 @@
                         <label class="form-label" for="usu_ape">Apellido</label>
                         <input type="text" class="form-control" id="usu_ape" name="usu_ape" placeholder="Ingrese Apellido" required>
                     </div>
-                    
 
+                    <div class="col-lg-15">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInput">Departamento</label>
+								<select id="dep_id" name="dep_id" class="form-control">
+                               
+  
+
+								</select>
+							</fieldset>
+						</div>
+                    
                     <div class="form-group">
                         <label class="form-label" for="usu_correo">Correo Electronico</label>
                         <input type="email" class="form-control" id="usu_correo" name="usu_correo" placeholder="test@test.com" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="usu_pass">Contraseña</label>
+                        <label class="form-label" for="usu_pass">Contraseña </label>
                         <input type="text" class="form-control" id="usu_pass" name="usu_pass" placeholder="************" required>
                     </div>
 

@@ -6,6 +6,11 @@ function init(){
     });
 }
 
+$.post("../../controller/departamento.php?op=combo",function(data, status){
+    $('#dep_id').html(data);
+});
+
+
 function guardaryeditar(e){
     e.preventDefault();
 	var formData = new FormData($("#usuario_form")[0]);
@@ -21,12 +26,6 @@ function guardaryeditar(e){
             $("#modalmantenimiento").modal('hide');
             $('#usuario_data').DataTable().ajax.reload();
 
-            swal({
-                title: "HelpDesk!",
-                text: "Completado.",
-                type: "success",
-                confirmButtonClass: "btn-success"
-            });
         }
     }); 
 }
@@ -93,9 +92,12 @@ function editar(usu_id){
         $('#usu_id').val(data.usu_id);
         $('#usu_nom').val(data.usu_nom);
         $('#usu_ape').val(data.usu_ape);
+        $('#dep_id').val(data.dep_id);
         $('#usu_correo').val(data.usu_correo);
         $('#usu_pass').val(data.usu_pass);
         $('#rol_id').val(data.rol_id).trigger('change');
+        
+        
     }); 
 
     $('#modalmantenimiento').modal('show');

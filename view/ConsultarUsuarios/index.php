@@ -31,8 +31,11 @@
 					</div>
 				</div>
 			</header>
+			
 
 			<div class="box-typical box-typical-padding">
+
+		
 				
 				<table id="usuario_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
 					<thead>
@@ -61,6 +64,7 @@
 	<?php require_once("../MainJs/js.php");?>
 	
 	<script type="text/javascript" src="ConsultarUsuarios.js"></script>
+	<script type="text/javascript" src="../notificacion.js"></script>
 
 </body>
 </html>

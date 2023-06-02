@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <?php require_once("../MainHead/head.php");?>
-	<title>AnderCode</>::Mantenimiento Categoria</title>
+	<title>Mantenimient Area</title>
 </head>
 <body class="with-side-menu">
 
@@ -22,10 +22,10 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h3>Mantenimiento Categoria</h3>
+							<h3>Mantenimiento Area de trabajo</h3>
 							<ol class="breadcrumb breadcrumb-simple">
 								<li><a href="#">Home</a></li>
-								<li class="active">Mantenimiento Categoria</li>
+								<li class="active">Mantenimiento Area de trabajo</li>
 							</ol>
 						</div>
 					</div>
@@ -37,7 +37,7 @@
 				<table id="usuario_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
 					<thead>
 						<tr>
-							<th style="width: 10%;">Nombre</th>
+							<th style="width: 10%;">Nombre Área</th>
 							<th class="text-center" style="width: 5%;"></th>
 							<th class="text-center" style="width: 5%;"></th>
 						</tr>
@@ -57,6 +57,8 @@
 	<?php require_once("../MainJs/js.php");?>
 	
 	<script type="text/javascript" src="mntcategoria.js"></script>
+
+	<script type="text/javascript" src="../notificacion.js"></script>
 
 </body>
 </html>

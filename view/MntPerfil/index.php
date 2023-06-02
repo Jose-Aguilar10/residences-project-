@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <?php require_once("../MainHead/head.php");?>
-	<title>AnderCode</>::Perfil</title>
+	<title>Perfil</title>
 </head>
 <body class="with-side-menu">
 
@@ -63,6 +63,8 @@
 	<?php require_once("../MainJs/js.php");?>
 	
 	<script type="text/javascript" src="mntperfil.js"></script>
+
+	<script type="text/javascript" src="../notificacion.js"></script>
 
 </body>
 </html>

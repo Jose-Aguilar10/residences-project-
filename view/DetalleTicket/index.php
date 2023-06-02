@@ -49,7 +49,7 @@ if (isset($_SESSION["usu_id"])) {
 
               <div class="col-lg-4">
                 <fieldset class="form-group">
-                  <label class="form-label semibold" for="cat_nom">Categoria</label>
+                  <label class="form-label semibold" for="cat_nom">Área de trabajo</label>
                   <input type="text" class="form-control" id="cat_nom" name="cat_nom" readonly> <!-- el readonly permite que solo sea de lectura -->
                 </fieldset>
               </div>
@@ -138,6 +138,8 @@ if (isset($_SESSION["usu_id"])) {
     <?php require_once("../MainJs/js.php"); ?>
 
     <script type="text/javascript" src="detalleticket.js"></script>
+
+    <script type="text/javascript" src="../notificacion.js"></script>
 
   </body>
 

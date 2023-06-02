@@ -56,7 +56,7 @@
 
 					<div class="col-lg-3">
 						<fieldset class="form-group">
-							<label class="form-label" for="cat_id">Categoria</label>
+							<label class="form-label" for="cat_id">Área de trabajo</label>
 							<select class="select2" id="cat_id" name="cat_id" data-placeholder="Seleccionar">
 								<option label="Seleccionar"></option>
 
@@ -94,7 +94,7 @@
 						<thead>
 							<tr>
 								<th style="width: 5%;">Nro.Ticket</th>
-								<th style="width: 15%;">Categoria</th>
+								<th style="width: 15%;">Área de trabajo</th>
 								<th class="d-none d-sm-table-cell" style="width: 30%;">Titulo</th>
 								<th class="d-none d-sm-table-cell" style="width: 5%;">Prioridad</th>
 								<th class="d-none d-sm-table-cell" style="width: 5%;">Estado</th>
@@ -120,6 +120,8 @@
 	<?php require_once("../MainJs/js.php");?>
 	
 	<script type="text/javascript" src="ConsultarTickets.js"></script>
+
+	<script type="text/javascript" src="../notificacion.js"></script>
 
 </body>
 </html>

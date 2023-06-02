@@ -54,7 +54,7 @@
 
 						<div class="col-lg-6">
 							<fieldset class="form-group">
-								<label class="form-label semibold" for="exampleInput">Categoria</label>
+								<label class="form-label semibold" for="exampleInput">Área de trabajo</label>
 								<select id="cat_id" name="cat_id" class="form-control">
 
 								</select>
@@ -63,7 +63,7 @@
 
 						<div class="col-lg-6">
 							<fieldset class="form-group">
-								<label class="form-label semibold" for="exampleInput">SubCategoria</label>
+								<label class="form-label semibold" for="exampleInput">SubCategoria área</label>
 								<select id="cats_id" name="cats_id" class="form-control">
 
 								</select>
@@ -109,6 +109,8 @@
 	<?php require_once("../MainJS/js.php");?>
 	
 	<script type="text/javascript" src="nuevotickets.js"></script>
+
+	<script type="text/javascript" src="../notificacion.js"></script>
 
 </body>
 </html>

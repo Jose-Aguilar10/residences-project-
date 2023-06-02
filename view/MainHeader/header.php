@@ -15,6 +15,24 @@
         </button>
 
         <div class="site-header-content">
+        <a href="#" class="header-alarm dropdown-toggle active" id="dd-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
+        <i class="font-icon-alarm"></i>
+        </a>
+
+
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-notif" aria-labelledby="dd-notification">
+  <div class="dropdown-menu-notif-header">
+    Notificaciones
+  </div>
+  <div class="dropdown-menu-notif-list" id="notificaciones-lista">
+    <!-- Aquí se mostrarán las notificaciones -->
+  </div>
+  <div class="dropdown-menu-notif-more">
+    <a href="#">Ver más</a>
+  </div>
+</div>
+
+
             <div class="site-header-content-in">
                 <div class="site-header-shown">
                     <div class="dropdown user-menu">
@@ -23,7 +41,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
                             <a class="dropdown-item" href="../MntPerfil/"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
-                            <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-question-sign"></span>Ayuda</a>
+                          
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../Logout/logout.php"><span class="font-icon glyphicon glyphicon-log-out"></span>Cerrar Sesion</a>
                         </div>

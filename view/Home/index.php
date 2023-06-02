@@ -52,7 +52,7 @@
 
 			<section class="card">
 				<header class="card-header">
-					Grafico Estadístico
+					Grafico de áreas de trabajo
 				</header>
 				<div class="card-block">
 					<div id="divgrafico" style="height: 250px;"></div>
@@ -68,6 +68,8 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 	<script type="text/javascript" src="home.js"></script>
+
+	<script type="text/javascript" src="../notificacion.js"></script>
 
 </body>
 </html>
