@@ -15,7 +15,7 @@
         </button>
 
         <div class="site-header-content">
-        <a href="#" class="header-alarm dropdown-toggle active" id="dd-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
+        <a href="#" class="header-alarm dropdown-toggle" id="dd-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
         <i class="font-icon-alarm"></i>
         </a>
 
@@ -26,6 +26,9 @@
   </div>
   <div class="dropdown-menu-notif-list" id="notificaciones-lista">
     <!-- Aquí se mostrarán las notificaciones -->
+   
+
+  
   </div>
   <div class="dropdown-menu-notif-more">
     <a href="#">Ver más</a>

@@ -23,6 +23,17 @@
             return $resultado=$sql->fetchAll();
         }
 
+        public function get_notificacion_x_usu3_limit($usu_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql = "SELECT * FROM tm_notificacion WHERE usu_id = ? ORDER BY not_id DESC LIMIT 20";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usu_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+
         /* TODO: Actualizar estado de la notificacion luego de ser mostrado */
         public function update_notificacion_estado($not_id){
             $conectar= parent::conexion();

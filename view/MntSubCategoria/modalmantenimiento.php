@@ -12,7 +12,7 @@
                     <input type="hidden" id="cats_id" name="cats_id">
 
                     <div class="form-group">
-                        <label class="form-label" for="cat_id">Categoria</label>
+                        <label class="form-label" for="cat_id">Área de trabajo</label>
                         <select class="select2" id="cat_id" name="cat_id">
 
                         </select>

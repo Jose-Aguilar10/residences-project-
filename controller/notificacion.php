@@ -48,5 +48,26 @@
             echo json_encode($results);
             break;
 
+            case "listar_vanilla":
+                $datos = $notificacion->get_notificacion_x_usu3_limit($_POST["usu_id"]);
+                $data = array();
+                foreach ($datos as $row) {
+                    $sub_array = array();
+                    $sub_array[] = $row["not_id"];
+                    $sub_array[] = $row["not_mensaje"] . ' ' . $row["tick_id"];
+                    $sub_array[] = $row["tick_id"];
+                    $data[] = $sub_array;
+                }
+            
+                $results = array(
+                    "data" => $data
+                );
+                echo json_encode($results);
+                break;
+            
+
     }
+
+
+    
 ?>

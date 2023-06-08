@@ -22,10 +22,10 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h3>Mantenimiento SubCategoria Área</h3>
+							<h3>Mantenimiento Subcategoria Área</h3>
 							<ol class="breadcrumb breadcrumb-simple">
 								<li><a href="#">Home</a></li>
-								<li class="active">Mantenimiento SubCategoria Área</li>
+								<li class="active">Mantenimiento Subcategoria Área</li>
 							</ol>
 						</div>
 					</div>

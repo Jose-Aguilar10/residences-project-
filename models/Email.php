@@ -132,4 +132,3 @@ class Email extends PHPMailer{
 }
 
 ?>
-<!--     //variable que contiene la contraseña del destinatario -->
